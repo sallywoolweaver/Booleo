@@ -87,16 +87,19 @@ class Gameplay:
 
 
 class Start_Bools:
-    def __init__(self):
-        self.image = '0.png'
+
 
     def get_img(self):
-        return self.image
+        if self.start_bit==0:
+            self.image = '0.png'
+        else:
+            self.image= '1.png'
     
     def get_starting_bit(self):
         return random.randint(0,1)
     
- 
+    def __init__(self):
+        self.start_bit=self.get_starting_bit() 
  
 if __name__ == "__main__":
     game = Gameplay()
