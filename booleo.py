@@ -10,9 +10,10 @@ class Gameplay:
         self.main()
         
     def setup(self):
-        start_bools = Start_Bools() 
+        self.start_bools = Start_Bools()
+        self.start_deck =[]
         for i in range (6) :
-            print(start_bools.get_starting_bit())
+            self.start_deck.append(Start_Bools())
     
     def main(self):
 
@@ -28,10 +29,14 @@ class Gameplay:
         #game_board = pygame.image.load('game_board.png')
 
         # Load the images for the game board
-        image= pygame.image.load('0.png')
+        images=[]
+        #image= pygame.image.load('0.png')
+        for card in self.start_deck:
+            images.append(pygame.transform.scale(pygame.image.load(card.get_img()), (100,150)))
+        #print(images)
         self.setup()
         # Resize the image
-        image = pygame.transform.scale(image, (100, 150))
+        #image = pygame.transform.scale(image, (100, 150))
 
 
         # Set up game variables
@@ -59,7 +64,7 @@ class Gameplay:
         # Define the space between images
             space_between_images = 40  # adjust this value as needed
 
-            images = [image, image, image, image, image, image]
+            #images = [image, image, image, image, image, image]
             for i, img in enumerate(images):
                 # Calculate the total width of one image plus the space
                 total_width = img.get_width() + space_between_images
@@ -90,10 +95,13 @@ class Start_Bools:
 
 
     def get_img(self):
+        print("test value", self.start_bit)
         if self.start_bit==0:
             self.image = '0.png'
+            print("true")
         else:
             self.image= '1.png'
+        return self.image
     
     def get_starting_bit(self):
         return random.randint(0,1)
